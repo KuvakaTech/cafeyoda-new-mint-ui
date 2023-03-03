@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-export const Section = styled('div')<any>`
+export const Section = styled("div")<any>`
   width: calc(100% - 64px);
   height: calc(100vh - 192px);
   padding: 96px 0;
@@ -11,11 +11,11 @@ export const Section = styled('div')<any>`
   }
 
   @media only screen and (max-width: 450px) {
-    width:auto;
+    width: auto;
     padding: 32px 0;
   }
-`
-export const Container = styled('div')<any>`
+`;
+export const Container = styled("div")<any>`
   width: 100%;
   height: 100%;
   max-width: 1280px;
@@ -25,7 +25,7 @@ export const Container = styled('div')<any>`
   display: flex;
   flex-direction: row;
   gap: 96px;
-  
+
   @media only screen and (max-width: 1024px) {
     gap: 48px;
   }
@@ -39,7 +39,7 @@ export const Container = styled('div')<any>`
     width: auto;
   }
 `;
-export const Column = styled('div')<any>`
+export const Column = styled("div")<any>`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -52,8 +52,8 @@ export const Column = styled('div')<any>`
     gap: 32px;
   }
 `;
-export const MintCount = styled('h3')`
-  font-family: 'Plus Jakarta Sans';
+export const MintCount = styled("h3")`
+  font-family: "Poppins";
   font-style: normal;
   font-weight: 600;
   font-size: 20px;

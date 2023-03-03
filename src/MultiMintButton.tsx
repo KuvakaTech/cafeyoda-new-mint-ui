@@ -6,7 +6,11 @@ import styled from "styled-components";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { PublicKey } from "@solana/web3.js";
 import { GatewayStatus, useGateway } from "@civic/solana-gateway-react";
-import { GuardGroupStates, ParsedPricesForUI, PaymentRequired } from "./hooks/types";
+import {
+  GuardGroupStates,
+  ParsedPricesForUI,
+  PaymentRequired,
+} from "./hooks/types";
 
 // Icons
 const MinusIcon = (props) => (
@@ -25,8 +29,7 @@ const MinusIcon = (props) => (
       strokeLinejoin="round"
     />
   </svg>
-)
-
+);
 
 const PlusIcon = (props) => (
   <svg
@@ -44,7 +47,7 @@ const PlusIcon = (props) => (
       strokeLinejoin="round"
     />
   </svg>
-)
+);
 
 export const CTAButton = styled.button`
   width: 100%;
@@ -55,7 +58,7 @@ export const CTAButton = styled.button`
   color: var(--white);
   cursor: pointer;
   border: none;
-  font-family: 'Plus Jakarta Sans';
+  font-family: "Poppins";
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
@@ -73,13 +76,20 @@ export const ButtonWrap = styled.div`
   align-items: center;
   color: var(--white);
   border: none;
-  font-family: 'Plus Jakarta Sans';
+  font-family: "Poppins";
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
   line-height: 150%;
   text-transform: uppercase;
-`
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    button {
+      align-items: center;
+      margin-bottom: 0.4rem;
+    }
+  }
+`;
 export const NumberWrap = styled.div`
   display: flex;
   flex-direction: row;
@@ -88,8 +98,8 @@ export const NumberWrap = styled.div`
   padding: 16px;
   gap: 8px;
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 6px;  
-`
+  border-radius: 6px;
+`;
 
 export const NumbericIcon = styled.button`
   border: none;
@@ -110,7 +120,7 @@ export const NumberInput = styled.div`
   gap: 20px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 6px;
-`
+`;
 export const NumericField = styled.input`
   font-size: 20px !important;
   padding: 0;
@@ -118,7 +128,7 @@ export const NumericField = styled.input`
   background-color: none;
   box-sizing: border-box;
   background: none;
-  font-family: 'Plus Jakarta Sans';
+  font-family: "Poppins";
   font-weight: 600;
   line-height: 100%;
   height: 20px;
@@ -143,7 +153,7 @@ export const NumericField = styled.input`
   }
 `;
 export const EstimatedCost = styled.p`
-  font-family: 'Plus Jakarta Sans';
+  font-family: "Poppins";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -155,7 +165,7 @@ export const EstimatedCost = styled.p`
   @media only screen and (max-width: 450px) {
     font-size: 12px;
   }
-`
+`;
 function usePrevious<T>(value: T): T | undefined {
   const ref = useRef<T>();
   useEffect(() => {
@@ -203,10 +213,10 @@ export const MultiMintButton = ({
     () =>
       prices
         ? mintCount *
-        (prices.payment
-          .filter(({ kind }) => kind === "sol")
-          .reduce((a, { price }) => a + price, 0) +
-          0.012)
+          (prices.payment
+            .filter(({ kind }) => kind === "sol")
+            .reduce((a, { price }) => a + price, 0) +
+            0.012)
         : 0.012,
     [mintCount, prices]
   );
@@ -316,78 +326,79 @@ export const MultiMintButton = ({
     <div className="w-100">
       <div className="w-100">
         <ButtonWrap>
-        <CTAButton
-          disabled={disabled}
-          onClick={async () => {
-            console.log("isActive gatekeeperNetwork", {
-              isActive,
-              gatekeeperNetwork,
-            });
-            if (isActive && gatekeeperNetwork) {
-              if (gatewayStatus === GatewayStatus.ACTIVE) {
-                await onMint(mintCount);
+          <CTAButton
+            disabled={disabled}
+            onClick={async () => {
+              console.log("isActive gatekeeperNetwork", {
+                isActive,
+                gatekeeperNetwork,
+              });
+              if (isActive && gatekeeperNetwork) {
+                if (gatewayStatus === GatewayStatus.ACTIVE) {
+                  await onMint(mintCount);
+                } else {
+                  setWaitForActiveToken(true);
+                  await requestGatewayToken();
+                }
               } else {
-                setWaitForActiveToken(true);
-                await requestGatewayToken();
+                await onMint(mintCount);
               }
-            } else {
-              await onMint(mintCount);
-            }
-          }}
-          variant="contained"
-        >
-          {!candyMachine ? (
-            "CONNECTING..."
-          ) : isSoldOut ? (
-            "SOLD OUT"
-          ) : isActive ? guardStates.messages.length ? (guardStates.messages[0]) : (
-            mintCount > limit ? (
-              "LIMIT REACHED"
-            ) : isMinting || loading ? (
-              <CircularProgress />
+            }}
+            variant="contained"
+          >
+            {!candyMachine ? (
+              "CONNECTING..."
+            ) : isSoldOut ? (
+              "SOLD OUT"
+            ) : isActive ? (
+              guardStates.messages.length ? (
+                guardStates.messages[0]
+              ) : mintCount > limit ? (
+                "LIMIT REACHED"
+              ) : isMinting || loading ? (
+                <CircularProgress />
+              ) : (
+                "MINT"
+              )
+            ) : isEnded ? (
+              "ENDED"
             ) : (
-              "MINT"
-            )
-          ) : isEnded ? (
-            "ENDED"
-          ) : (
-            "UNAVAILABLE"
-          )}
+              "UNAVAILABLE"
+            )}
 
-          {!isSoldOut && isActive && (
-        <EstimatedCost>
-          Estimated costs: {costSolUI(totalSolCost)} SOL
-          {totalTokenCostsString}
-        </EstimatedCost>
-        )}
-        </CTAButton>
+            {!isSoldOut && isActive && (
+              <EstimatedCost>
+                Estimated costs: {costSolUI(totalSolCost)} SOL
+                {totalTokenCostsString}
+              </EstimatedCost>
+            )}
+          </CTAButton>
 
           <NumberInput>
-          <NumbericIcon
-            disabled={disabled || mintCount <= 1}
-            onClick={() => decrementValue()}
-          >
-            <MinusIcon></MinusIcon>
-          </NumbericIcon>
-          <NumericField
-            disabled={disabled}
-            type="number"
-            className="mint-qty"
-            step={1}
-            min={1}
-            max={Math.min(limit, 10)}
-            value={mintCount}
-            onChange={(e) => updateMintCount(e.target as any)}
-          />
-          <NumbericIcon
-            disabled={disabled || limit <= mintCount}
-            onClick={() => incrementValue()}
-          >
-            <PlusIcon></PlusIcon>
-          </NumbericIcon>
+            <NumbericIcon
+              disabled={disabled || mintCount <= 1}
+              onClick={() => decrementValue()}
+            >
+              <MinusIcon></MinusIcon>
+            </NumbericIcon>
+            <NumericField
+              disabled={disabled}
+              type="number"
+              className="mint-qty"
+              step={1}
+              min={1}
+              max={Math.min(limit, 10)}
+              value={mintCount}
+              onChange={(e) => updateMintCount(e.target as any)}
+            />
+            <NumbericIcon
+              disabled={disabled || limit <= mintCount}
+              onClick={() => incrementValue()}
+            >
+              <PlusIcon></PlusIcon>
+            </NumbericIcon>
           </NumberInput>
-          </ButtonWrap>
-        
+        </ButtonWrap>
       </div>
       {guardStates.messages?.map((m, i) => (
         <p key={i}>{m}</p>

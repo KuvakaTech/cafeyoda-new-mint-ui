@@ -25,7 +25,7 @@ export const Action = styled.button`
   background: var(--primary);
   border-radius: 4px;
   border: none;
-  font-family: 'Plus Jakarta Sans';
+  font-family: "Poppins";
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
@@ -51,11 +51,11 @@ export const Action = styled.button`
 export default function NftsModal({
   mintedItems,
   setMintedItems,
-  openOnSolscan
+  openOnSolscan,
 }: {
   mintedItems: (Nft | NftWithToken)[];
   setMintedItems: any;
-  openOnSolscan: (key: string) => void
+  openOnSolscan: (key: string) => void;
 }) {
   const handleClose = () => {
     setMintedItems([]);
@@ -74,9 +74,9 @@ export default function NftsModal({
         <DialogTitle id="alert-dialog-slide-title">
           Congratulations you just minted:
         </DialogTitle>
-        <Action onClick={handleClose}>Close</Action>  
+        <Action onClick={handleClose}>Close</Action>
       </DialogActions>
-      
+
       <DialogContent>
         <DialogContentText id="alert-dialog-slide-description">
           <Grid container spacing={1}>
@@ -115,13 +115,18 @@ export default function NftsModal({
                           label={`${trait_type}: ${value}`}
                           variant="outlined"
                           key={trait_type}
-                          style={{margin: 2}}
+                          style={{ margin: 2 }}
                         />
                       ))}
                     </CardContent>
                   </CardActionArea>
-                  <CardActions >
-                    <Action style={{width: "100%"}} onClick={() => openOnSolscan(nft.address.toString())}>View on solscan</Action>
+                  <CardActions>
+                    <Action
+                      style={{ width: "100%" }}
+                      onClick={() => openOnSolscan(nft.address.toString())}
+                    >
+                      View on solscan
+                    </Action>
                   </CardActions>
                 </Card>
               </Grid>

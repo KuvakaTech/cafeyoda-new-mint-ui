@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useContext, useLayoutEffect } from "react";
 import { Paper, Snackbar, LinearProgress } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import { DefaultCandyGuardRouteSettings, Nft } from "@metaplex-foundation/js";
@@ -8,6 +8,9 @@ import { LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js";
 import confetti from "canvas-confetti";
 import Link from "next/link";
 import Countdown from "react-countdown";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 
 import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
@@ -325,6 +328,111 @@ const ConnectWallet = styled(WalletMultiButton)`
     opacity: 0.9;
   }
 `;
+const SpecialNFTSlider = styled.div`
+  display: flex;
+  justify-content: center;
+  .maxWidthContainer {
+    max-width: 1440px;
+    padding: 0 16px;
+    width: 100%;
+    .nftSliderItem {
+      max-height: 400px;
+    }
+    .slick-arrow {
+      z-index: 4 !important;
+    }
+    .slick-prev {
+      left: 0px;
+    }
+    .slick-next {
+      right: 0px;
+    }
+    .sliderImageContainer {
+      margin: 0 2rem;
+      height: 100%;
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+`;
+
+const sliderData = [
+  {
+    id: 1,
+    name: "NFT 1",
+    image:
+      "https://cdn.discordapp.com/attachments/895650450186047498/1081180927708889168/988.png",
+  },
+  {
+    id: 2,
+    name: "NFT 1",
+    image:
+      "https://cdn.discordapp.com/attachments/895650450186047498/1081180928052826192/989.png",
+  },
+  {
+    id: 3,
+    name: "NFT 1",
+    image:
+      "https://cdn.discordapp.com/attachments/895650450186047498/1081180928426115182/990.png",
+  },
+  {
+    id: 4,
+    name: "NFT 1",
+    image:
+      "https://cdn.discordapp.com/attachments/895650450186047498/1081180928849756231/991.png",
+  },
+  {
+    id: 5,
+    name: "NFT 1",
+    image:
+      "https://cdn.discordapp.com/attachments/895650450186047498/1081180929185288303/992.png",
+  },
+  {
+    id: 6,
+    name: "NFT 1",
+    image:
+      "https://cdn.discordapp.com/attachments/895650450186047498/1081180929550205008/993.png",
+  },
+  {
+    id: 7,
+    name: "NFT 1",
+    image:
+      "https://cdn.discordapp.com/attachments/895650450186047498/1081180929965428886/994.png",
+  },
+  {
+    id: 8,
+    name: "NFT 1",
+    image:
+      "https://cdn.discordapp.com/attachments/895650450186047498/1081180930334523522/995.png",
+  },
+  {
+    id: 9,
+    name: "NFT 1",
+    image:
+      "https://cdn.discordapp.com/attachments/895650450186047498/1081180930732998676/996.png",
+  },
+  {
+    id: 10,
+    name: "NFT 1",
+    image:
+      "https://cdn.discordapp.com/attachments/895650450186047498/1081180931110473798/997.png",
+  },
+  {
+    id: 11,
+    name: "NFT 1",
+    image:
+      "https://cdn.discordapp.com/attachments/895650450186047498/1081181020717584444/998.png",
+  },
+  {
+    id: 12,
+    name: "NFT 1",
+    image:
+      "https://cdn.discordapp.com/attachments/895650450186047498/1081181021053141112/999.png",
+  },
+];
 
 export interface HomeProps {
   candyMachineId: PublicKey;
@@ -339,6 +447,7 @@ const candyMachinOps = {
 };
 const Home = (props: HomeProps) => {
   const { connection } = useConnection();
+  const [innerWidth, setInnerWidth] = useState<number>(1400);
   const wallet = useWallet();
   const candyMachineV3 = useCandyMachineV3(
     props.candyMachineId,
@@ -572,6 +681,37 @@ const Home = (props: HomeProps) => {
       />
     </svg>
   );
+  function noOfSlidesToShow() {
+    console.log(innerWidth);
+    if (innerWidth < 750) return 1;
+    else if (innerWidth < 1100) return 3;
+    return 4;
+  }
+  var settings = {
+    dots: true,
+    infinite: true,
+    arrows: true,
+    speed: 500,
+    slidesToShow: noOfSlidesToShow(),
+    slidesToScroll: 1,
+  };
+
+  function updateInnerWidth() {
+    if (window) setInnerWidth(window.innerWidth);
+  }
+
+  useEffect(() => {
+    window.addEventListener("resize", updateInnerWidth);
+    return () => window.removeEventListener("resize", updateInnerWidth);
+  });
+
+  useEffect(() => {
+    //Since in case of nextjs i cannot provide the value window.innerWidth as the default value for innerWidth
+    const currWidth = window.innerWidth;
+    if (currWidth) {
+      setInnerWidth(currWidth);
+    }
+  }, []);
 
   return (
     <main>
@@ -614,19 +754,32 @@ const Home = (props: HomeProps) => {
                     </InfoBox>
                   )}
                   <IconRow>
-                    <a href="#" target="_blank" rel="noopener noreferrer">
+                    <a
+                      href="https://cafeyoda.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <Globe></Globe>
                     </a>
-                    <a href="#" target="_blank" rel="noopener noreferrer">
+                    <a
+                      href="https://twitter.com/cafeyoda1?s=21&t=fFIEyxA5UrcSuGkL2BnYMg"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <Twitter></Twitter>
                     </a>
-                    <a href="#" target="_blank" rel="noopener noreferrer">
+                    <a
+                      href="https://discord.gg/RuTfrjqKxE"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <Discord></Discord>
                     </a>
                   </IconRow>
                 </InfoRow>
                 <CollectionDescription>
-                  Collection of 1000 Yodas on the blockchain.
+                  World of Coffee is a collection of 1,000 Yoda Goat nfts-unique
+                  digital collectibles living on the Solana blockchain.
                 </CollectionDescription>
               </Content>
               <Other>
@@ -722,6 +875,28 @@ const Home = (props: HomeProps) => {
             </Column>
           </Container>
         </Section>
+        <SpecialNFTSlider>
+          <div className="maxWidthContainer">
+            <div className="nftSlider">
+              <Slider {...settings}>
+                {sliderData.map((item, index) => {
+                  return (
+                    <div className="nftSliderItem" key={item.id}>
+                      <div className="sliderImageContainer">
+                        <img src={item.image} alt={item.name} />
+                      </div>
+
+                      {/* <div className="nftSliderItemInfo">
+                        <p>{item.name}</p>
+                        <p>{item.price}</p>
+                      </div> */}
+                    </div>
+                  );
+                })}
+              </Slider>
+            </div>
+          </div>
+        </SpecialNFTSlider>
       </>
       <Snackbar
         open={alertState.open}
