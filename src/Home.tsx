@@ -16,12 +16,7 @@ import { defaultGuardGroup, network } from "./config";
 
 import { MultiMintButton } from "./MultiMintButton";
 //import { MintButton } from "./MintButton";
-import {
-  MintCount,
-  Section,
-  Container,
-  Column,
-} from "./styles";
+import { MintCount, Section, Container, Column } from "./styles";
 import { AlertState } from "./utils";
 import NftsModal from "./NftsModal";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
@@ -37,7 +32,7 @@ const BorderLinearProgress = styled(LinearProgress)`
   height: 16px !important;
   border-radius: 30px;
   background-color: var(--alt-background-color) !important;
-  > div.MuiLinearProgress-barColorPrimary{
+  > div.MuiLinearProgress-barColorPrimary {
     background-color: var(--primary) !important;
   }
   > div.MuiLinearProgress-bar1Determinate {
@@ -82,7 +77,7 @@ const Content = styled.div`
   padding: 0px;
   gap: 32px;
   width: 100%;
-`
+`;
 const Other = styled.div`
   display: flex;
   flex-direction: column;
@@ -90,17 +85,18 @@ const Other = styled.div`
   padding: 0px;
   gap: 48px;
   width: 100%;
-`
+`;
 const ImageWrap = styled.div`
   aspect-ratio: 1 / 1;
   width: 100%;
-  background-image: url(https://images.pexels.com/photos/2832432/pexels-photo-2832432.png);
+  background-image: url(https://cdn.discordapp.com/attachments/895650450186047498/1081139921236004874/collection.png);
+  background-size: cover;
   border-radius: 16px;
-`
+`;
 const Image = styled.div`
   height: 100%
   width: 100%;
-`
+`;
 const CollectionName = styled.h1`
   font-weight: 800;
   font-size: 64px;
@@ -114,7 +110,7 @@ const CollectionName = styled.h1`
   @media only screen and (max-width: 450px) {
     font-size: 40px;
   }
-`
+`;
 const InfoRow = styled.div`
   display: flex;
   flex-direction: row;
@@ -122,14 +118,14 @@ const InfoRow = styled.div`
   padding: 0;
   gap: 16px;
   flex-wrap: wrap;
-`
+`;
 const InfoBox = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   padding: 10px 16px;
   gap: 8px;
-  border: 2px solid #FFFFFF;
+  border: 2px solid #ffffff;
   border-radius: 4px;
   font-weight: 600;
   font-size: 20px;
@@ -140,7 +136,7 @@ const InfoBox = styled.div`
   @media only screen and (max-width: 450px) {
     font-size: 18px;
   }
-`
+`;
 const IconRow = styled.div`
   display: flex;
   flex-direction: row;
@@ -148,20 +144,20 @@ const IconRow = styled.div`
   padding: 0px;
   gap: 24px;
   margin-bottom: -3px;
-`
+`;
 const CollectionDescription = styled.p`
   font-weight: 400;
   font-size: 20px;
   line-height: 150%;
   color: var(--white);
-`
+`;
 const MintedByYou = styled.span`
   font-style: italic;
   font-weight: 500;
   font-size: 16px;
   line-height: 100%;
   text-transform: none;
-`
+`;
 const ProgressbarWrap = styled.div`
   display: flex;
   flex-direction: column;
@@ -169,7 +165,7 @@ const ProgressbarWrap = styled.div`
   padding: 0px;
   gap: 16px;
   width: 100%;
-`
+`;
 const StartTimer = styled.div`
   display: flex;
   flex-direction: row;
@@ -185,7 +181,7 @@ const StartTimer = styled.div`
     width: -webkit-fill-available;
     justify-content: space-between;
   }
-`
+`;
 const StartTimerInner = styled(Paper)`
   display: flex;
   flex-direction: column;
@@ -224,15 +220,15 @@ const StartTimerWrap = styled.div`
   padding: 0px;
   gap: 16px;
   width: -webkit-fill-available;
-`
+`;
 const StartTimerSubtitle = styled.p`
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
   line-height: 100%;
   text-transform: uppercase;
-  color: #FFFFFF;
-`
+  color: #ffffff;
+`;
 const PrivateWrap = styled.div`
   display: flex;
   flex-direction: column;
@@ -240,7 +236,7 @@ const PrivateWrap = styled.div`
   padding: 0px;
   gap: 8px;
   width: -webkit-fill-available;
-`
+`;
 const PrivateText = styled.h2`
   display: flex;
   flex-direction: row;
@@ -257,14 +253,14 @@ const PrivateText = styled.h2`
   text-transform: uppercase;
   color: var(--white);
   width: -webkit-fill-available;
-`
+`;
 const PrivateSubtext = styled.p`
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
   color: var(--white);
-`
+`;
 const WalletAmount = styled.div`
   color: var(--white);
   width: auto;
@@ -328,7 +324,7 @@ const ConnectWallet = styled(WalletMultiButton)`
     color: var(--white) !important;
     opacity: 0.9;
   }
-`
+`;
 
 export interface HomeProps {
   candyMachineId: PublicKey;
@@ -368,20 +364,20 @@ const Home = (props: HomeProps) => {
         {},
       guardStates: candyMachineV3.guardStates[guardLabel] ||
         candyMachineV3.guardStates.default || {
-        isStarted: true,
-        isEnded: false,
-        isLimitReached: false,
-        canPayFor: 10,
-        messages: [],
-        isWalletWhitelisted: true,
-        hasGatekeeper: false,
-      },
+          isStarted: true,
+          isEnded: false,
+          isLimitReached: false,
+          canPayFor: 10,
+          messages: [],
+          isWalletWhitelisted: true,
+          hasGatekeeper: false,
+        },
       prices: candyMachineV3.prices[guardLabel] ||
         candyMachineV3.prices.default || {
-        payment: [],
-        burn: [],
-        gate: [],
-      },
+          payment: [],
+          burn: [],
+          gate: [],
+        },
     };
   }, [
     candyMachineV3.guards,
@@ -406,11 +402,12 @@ const Home = (props: HomeProps) => {
 
   const openOnSolscan = useCallback((mint) => {
     window.open(
-      `https://solscan.io/address/${mint}${[WalletAdapterNetwork.Devnet, WalletAdapterNetwork.Testnet].includes(
-        network
-      )
-        ? `?cluster=${network}`
-        : ""
+      `https://solscan.io/address/${mint}${
+        [WalletAdapterNetwork.Devnet, WalletAdapterNetwork.Testnet].includes(
+          network
+        )
+          ? `?cluster=${network}`
+          : ""
       }`
     );
   }, []);
@@ -431,18 +428,18 @@ const Home = (props: HomeProps) => {
           return {
             burn: guards.burn?.nfts?.length
               ? {
-                mint: guards.burn.nfts[i]?.mintAddress,
-              }
+                  mint: guards.burn.nfts[i]?.mintAddress,
+                }
               : undefined,
             payment: guards.payment?.nfts?.length
               ? {
-                mint: guards.payment.nfts[i]?.mintAddress,
-              }
+                  mint: guards.payment.nfts[i]?.mintAddress,
+                }
               : undefined,
             gate: guards.gate?.nfts?.length
               ? {
-                mint: guards.gate.nfts[i]?.mintAddress,
-              }
+                  mint: guards.gate.nfts[i]?.mintAddress,
+                }
               : undefined,
           };
         });
@@ -481,7 +478,7 @@ const Home = (props: HomeProps) => {
       candyMachine={candyMachineV3.candyMachine}
       gatekeeperNetwork={gatekeeperNetwork}
       isMinting={candyMachineV3.status.minting}
-      setIsMinting={() => { }}
+      setIsMinting={() => {}}
       isActive={!!candyMachineV3.items.remaining}
       isEnded={guardStates.isEnded}
       isSoldOut={!candyMachineV3.items.remaining}
@@ -495,8 +492,8 @@ const Home = (props: HomeProps) => {
     () =>
       prices
         ? prices.payment
-          .filter(({ kind }) => kind === "sol")
-          .reduce((a, { price }) => a + price, 0)
+            .filter(({ kind }) => kind === "sol")
+            .reduce((a, { price }) => a + price, 0)
         : 0,
     [prices]
   );
@@ -505,19 +502,27 @@ const Home = (props: HomeProps) => {
     () =>
       prices
         ? prices.payment
-          .filter(({ kind }) => kind === "token")
-          .reduce((a, { price }) => a + price, 0)
+            .filter(({ kind }) => kind === "token")
+            .reduce((a, { price }) => a + price, 0)
         : 0,
     [prices]
   );
 
   let candyPrice = null;
-   if (prices.payment.filter(({kind}) => kind === "token").reduce((a, { kind }) => a + kind, "")) {
-    candyPrice = `${tokenCost} Token`
-  } else if (prices.payment.filter(({kind}) => kind === "sol").reduce((a, { price }) => a + price, 0)) {
-    candyPrice = `◎ ${solCost}`
+  if (
+    prices.payment
+      .filter(({ kind }) => kind === "token")
+      .reduce((a, { kind }) => a + kind, "")
+  ) {
+    candyPrice = `${tokenCost} Token`;
+  } else if (
+    prices.payment
+      .filter(({ kind }) => kind === "sol")
+      .reduce((a, { price }) => a + price, 0)
+  ) {
+    candyPrice = `◎ ${solCost}`;
   } else {
-    candyPrice = "1 NFT"
+    candyPrice = "1 NFT";
   }
 
   console.log(candyPrice);
@@ -538,7 +543,7 @@ const Home = (props: HomeProps) => {
         strokeLinejoin="round"
       />
     </svg>
-  )
+  );
   const Twitter = (props) => (
     <svg
       width={28}
@@ -552,7 +557,7 @@ const Home = (props: HomeProps) => {
         fill="#fff"
       />
     </svg>
-  )
+  );
   const Discord = (props) => (
     <svg
       width={28}
@@ -566,9 +571,7 @@ const Home = (props: HomeProps) => {
         fill="#fff"
       />
     </svg>
-  )
-
-
+  );
 
   return (
     <main>
@@ -591,37 +594,43 @@ const Home = (props: HomeProps) => {
           <Container>
             <Column>
               <ImageWrap>
-                <Image>
-
-                </Image>
+                <Image></Image>
               </ImageWrap>
             </Column>
             <Column>
               <Content>
-                <CollectionName>Collection Name</CollectionName>
+                <CollectionName>Yodas Collection</CollectionName>
                 <InfoRow>
-                {guardStates.isStarted && wallet.publicKey && (
-                  <InfoBox>
-                    <p>Total items</p>
-                    <p>{candyMachineV3.items.available}{" "}</p>
-                  </InfoBox>
-                )} {guardStates.isStarted && wallet.publicKey && (
-                  <InfoBox>
-                    <p>Price</p>
-                    <p>{candyPrice}</p>
-                  </InfoBox>
-                )}
+                  {guardStates.isStarted && wallet.publicKey && (
+                    <InfoBox>
+                      <p>Total items</p>
+                      <p>{candyMachineV3.items.available} </p>
+                    </InfoBox>
+                  )}{" "}
+                  {guardStates.isStarted && wallet.publicKey && (
+                    <InfoBox>
+                      <p>Price</p>
+                      <p>{candyPrice}</p>
+                    </InfoBox>
+                  )}
                   <IconRow>
-                    <a href="#" target="_blank" rel="noopener noreferrer"><Globe></Globe></a>
-                    <a href="#" target="_blank" rel="noopener noreferrer"><Twitter></Twitter></a>
-                    <a href="#" target="_blank" rel="noopener noreferrer"><Discord></Discord></a>
+                    <a href="#" target="_blank" rel="noopener noreferrer">
+                      <Globe></Globe>
+                    </a>
+                    <a href="#" target="_blank" rel="noopener noreferrer">
+                      <Twitter></Twitter>
+                    </a>
+                    <a href="#" target="_blank" rel="noopener noreferrer">
+                      <Discord></Discord>
+                    </a>
                   </IconRow>
                 </InfoRow>
-                <CollectionDescription>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</CollectionDescription>
+                <CollectionDescription>
+                  Collection of 1000 Yodas on the blockchain.
+                </CollectionDescription>
               </Content>
               <Other>
                 {!guardStates.isStarted ? (
-                  
                   <Countdown
                     date={guards.startTime}
                     renderer={renderGoLiveDateCounter}
@@ -631,20 +640,23 @@ const Home = (props: HomeProps) => {
                   />
                 ) : !wallet?.publicKey ? (
                   <ConnectWallet>Connect Wallet</ConnectWallet>
-                  // ) : !guardStates.canPayFor ? (
-                  //   <h1>You cannot pay for the mint</h1>
-                ) : !guardStates.isWalletWhitelisted ? (
+                ) : // ) : !guardStates.canPayFor ? (
+                //   <h1>You cannot pay for the mint</h1>
+                !guardStates.isWalletWhitelisted ? (
                   <PrivateWrap>
-                  <PrivateText>Mint is private</PrivateText>
-                  <PrivateSubtext>You’re currently not allowed to mint. Try again at a later time.</PrivateSubtext>
+                    <PrivateText>Mint is private</PrivateText>
+                    <PrivateSubtext>
+                      You’re currently not allowed to mint. Try again at a later
+                      time.
+                    </PrivateSubtext>
                   </PrivateWrap>
                 ) : (
                   <>
                     <>
                       {!!candyMachineV3.items.remaining &&
-                        guardStates.hasGatekeeper &&
-                        wallet.publicKey &&
-                        wallet.signTransaction ? (
+                      guardStates.hasGatekeeper &&
+                      wallet.publicKey &&
+                      wallet.signTransaction ? (
                         <GatewayProvider
                           wallet={{
                             publicKey: wallet.publicKey,
@@ -670,31 +682,36 @@ const Home = (props: HomeProps) => {
                 )}
 
                 <ProgressbarWrap>
-                {guardStates.isStarted && wallet.publicKey && (
-                  <MintCount>
-                    Total minted {candyMachineV3.items.redeemed} /  
-                    {candyMachineV3.items.available}{" "}
-                    {(guards?.mintLimit?.mintCounter?.count ||
-                      guards?.mintLimit?.settings?.limit) && (
+                  {guardStates.isStarted && wallet.publicKey && (
+                    <MintCount>
+                      Total minted {candyMachineV3.items.redeemed} /
+                      {candyMachineV3.items.available}{" "}
+                      {(guards?.mintLimit?.mintCounter?.count ||
+                        guards?.mintLimit?.settings?.limit) && (
                         <MintedByYou>
-                        <>
-                          ({guards?.mintLimit?.mintCounter?.count || "0"}
-                          {guards?.mintLimit?.settings?.limit && (
-                            <>/{guards?.mintLimit?.settings?.limit} </>
-                          )}
-                          by you)
-                        </>
+                          <>
+                            ({guards?.mintLimit?.mintCounter?.count || "0"}
+                            {guards?.mintLimit?.settings?.limit && (
+                              <>/{guards?.mintLimit?.settings?.limit} </>
+                            )}
+                            by you)
+                          </>
                         </MintedByYou>
                       )}
-                  </MintCount>
-                )}
-                {guardStates.isStarted && wallet.publicKey && (
-                <div className="w-100">
-                <BorderLinearProgress variant="determinate" value={(candyMachineV3.items.redeemed * 100 / candyMachineV3.items.available)}></BorderLinearProgress>
-                </div>
-                )}
+                    </MintCount>
+                  )}
+                  {guardStates.isStarted && wallet.publicKey && (
+                    <div className="w-100">
+                      <BorderLinearProgress
+                        variant="determinate"
+                        value={
+                          (candyMachineV3.items.redeemed * 100) /
+                          candyMachineV3.items.available
+                        }
+                      ></BorderLinearProgress>
+                    </div>
+                  )}
                 </ProgressbarWrap>
-
 
                 <NftsModal
                   openOnSolscan={openOnSolscan}
@@ -717,7 +734,7 @@ const Home = (props: HomeProps) => {
         >
           {alertState.message}
         </Alert>
-      </Snackbar> 
+      </Snackbar>
     </main>
   );
 };
@@ -729,20 +746,20 @@ const renderGoLiveDateCounter = ({ days, hours, minutes, seconds }: any) => {
     <StartTimerWrap>
       <StartTimerSubtitle>Mint opens in:</StartTimerSubtitle>
       <StartTimer>
-      <StartTimerInner elevation={1}>
-        <span>{days}</span>Days
-      </StartTimerInner>
-      <StartTimerInner elevation={1}>
-        <span>{hours}</span>
-        Hours
-      </StartTimerInner>
-      <StartTimerInner elevation={1}>
-        <span>{minutes}</span>Mins
-      </StartTimerInner>
-      <StartTimerInner elevation={1}>
-        <span>{seconds}</span>Secs
-      </StartTimerInner>
-    </StartTimer>
+        <StartTimerInner elevation={1}>
+          <span>{days}</span>Days
+        </StartTimerInner>
+        <StartTimerInner elevation={1}>
+          <span>{hours}</span>
+          Hours
+        </StartTimerInner>
+        <StartTimerInner elevation={1}>
+          <span>{minutes}</span>Mins
+        </StartTimerInner>
+        <StartTimerInner elevation={1}>
+          <span>{seconds}</span>Secs
+        </StartTimerInner>
+      </StartTimer>
     </StartTimerWrap>
   );
 };
