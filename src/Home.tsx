@@ -364,73 +364,73 @@ const sliderData = [
     id: 1,
     name: "NFT 1",
     image:
-      "https://cdn.discordapp.com/attachments/895650450186047498/1081180927708889168/988.png",
+      "https://cdn.discordapp.com/attachments/895650450186047498/1081189479223677059/988.png",
   },
   {
     id: 2,
     name: "NFT 1",
     image:
-      "https://cdn.discordapp.com/attachments/895650450186047498/1081180928052826192/989.png",
+      "https://cdn.discordapp.com/attachments/895650450186047498/1081189478938443897/989.png",
   },
   {
     id: 3,
     name: "NFT 1",
     image:
-      "https://cdn.discordapp.com/attachments/895650450186047498/1081180928426115182/990.png",
+      "https://cdn.discordapp.com/attachments/895650450186047498/1081189478678417438/990.png",
   },
   {
     id: 4,
     name: "NFT 1",
     image:
-      "https://cdn.discordapp.com/attachments/895650450186047498/1081180928849756231/991.png",
+      "https://cdn.discordapp.com/attachments/895650450186047498/1081189478477070366/991.png",
   },
   {
     id: 5,
     name: "NFT 1",
     image:
-      "https://cdn.discordapp.com/attachments/895650450186047498/1081180929185288303/992.png",
+      "https://cdn.discordapp.com/attachments/895650450186047498/1081189478242193428/992.png",
   },
   {
     id: 6,
     name: "NFT 1",
     image:
-      "https://cdn.discordapp.com/attachments/895650450186047498/1081180929550205008/993.png",
+      "https://cdn.discordapp.com/attachments/895650450186047498/1081189477990551682/993.png",
   },
   {
     id: 7,
     name: "NFT 1",
     image:
-      "https://cdn.discordapp.com/attachments/895650450186047498/1081180929965428886/994.png",
+      "https://cdn.discordapp.com/attachments/895650450186047498/1081189477726290030/994.png",
   },
   {
     id: 8,
     name: "NFT 1",
     image:
-      "https://cdn.discordapp.com/attachments/895650450186047498/1081180930334523522/995.png",
+      "https://cdn.discordapp.com/attachments/895650450186047498/1081189477491413023/995.png",
   },
   {
     id: 9,
     name: "NFT 1",
     image:
-      "https://cdn.discordapp.com/attachments/895650450186047498/1081180930732998676/996.png",
+      "https://cdn.discordapp.com/attachments/895650450186047498/1081189477239771206/996.png",
   },
   {
     id: 10,
     name: "NFT 1",
     image:
-      "https://cdn.discordapp.com/attachments/895650450186047498/1081180931110473798/997.png",
+      "https://cdn.discordapp.com/attachments/895650450186047498/1081189477004869713/997.png",
   },
   {
     id: 11,
     name: "NFT 1",
     image:
-      "https://cdn.discordapp.com/attachments/895650450186047498/1081181020717584444/998.png",
+      "https://cdn.discordapp.com/attachments/895650450186047498/1081189540896706691/998.png",
   },
   {
     id: 12,
     name: "NFT 1",
     image:
-      "https://cdn.discordapp.com/attachments/895650450186047498/1081181021053141112/999.png",
+      "https://cdn.discordapp.com/attachments/895650450186047498/1081189540653453362/999.png",
   },
 ];
 
